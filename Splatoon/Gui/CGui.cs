@@ -164,7 +164,7 @@ internal unsafe partial class CGui : IDisposable
     private string lastContent = "";
     private void DisplayConversion()
     {
-        ImGui.Checkbox($"Convert clipboard content from github to wiki", ref Convert);
+        ImGui.Checkbox("Convert clipboard content from GitHub to wiki".Loc(), ref Convert);
         if(Convert)
         {
             try

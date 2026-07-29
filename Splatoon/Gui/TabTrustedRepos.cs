@@ -15,17 +15,17 @@ public static class TabTrustedRepos
         if(!display)
         {
             ImGuiEx.TextWrapped(EColor.RedBright, "You are about to access EXTRAORDINARELY DANGEROUS OPTIONS. Normally, the ONLY time you'd want to use it if you are the developer. ".Loc());
-            ImGui.Checkbox($"I understand that improper use of these functions may result in irrecoverable damages.", ref pass);
+            ImGui.Checkbox("I understand that improper use of these functions may result in irrecoverable damages.".Loc(), ref pass);
         }
         if(!pass) return;
         pass = true;
-        ImGuiEx.Text($"Extra trusted sources");
+        ImGuiEx.Text("Extra trusted sources".Loc());
         ImGui.Indent();
         ImGuiEx.TextWrapped($"Add extra trusted sources from which you would like to import scripts. One per line. Any URL that starts with any of the lines you add will be considered trusted. You should choose wisely. Splatoon developers and publishers are NOT responsible for any possible damage that will happen to your game, characters, personal data, operating system, and PC if you will use this function incorrectly.".Loc());
         ImGui.Unindent();
         ImGuiEx.InputTextMultilineExpanding("trustSource", ref P.Config.ExtraTrustedRepos, 2000, 5);
         ImGui.Separator();
-        ImGuiEx.Text($"Extra update sources");
+        ImGuiEx.Text("Extra update sources".Loc());
         ImGui.Indent();
         ImGuiEx.TextWrapped(EColor.RedBright, $"In addition to official Splatoon repo, Splatoon will check scripts for updates from the following lists, one per line. WARNING. By adding an extra list here you will allow maintainer of such list to run ANY CODE ON YOUR COMPUTER, without any restrictions. Splatoon developers and publishers are NOT responsible for any possible damage that will happen to your game, characters, personal data, operating system, and PC if you will use this function incorrectly.".Loc());
         ImGui.Unindent();

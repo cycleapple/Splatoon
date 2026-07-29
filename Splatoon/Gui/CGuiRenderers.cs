@@ -17,21 +17,21 @@ internal partial class CGui
         if(Utils.IsLinux())
         {
             new NuiBuilder()
-                .Section("Mac OS/Linux detected")
+                .Section("Mac OS/Linux detected".Loc())
                 .Widget(() =>
                 {
-                    ImGuiEx.TextWrapped($"Mac OS or Linux operating system detected.");
+                    ImGuiEx.TextWrapped("Mac OS or Linux operating system detected.".Loc());
                     if(P.Config.DX11EnabledOnMacLinux)
                     {
-                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Times, "Disable DirectX11 renderer on Mac OS/Linux"))
+                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Times, "Disable DirectX11 renderer on Mac OS/Linux".Loc()))
                         {
                             P.Config.DX11EnabledOnMacLinux = false;
                         }
                     }
                     else
                     {
-                        ImGuiEx.TextWrapped($"Due to issues unrelated to Splatoon or Dalamud, DirectX11 renderer often causes crashes on these systems. Please press the following button to test whether you have this issue or not:");
-                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.ExclamationTriangle, "Reload DirectX11 render engine"))
+                        ImGuiEx.TextWrapped("Due to issues unrelated to Splatoon or Dalamud, DirectX11 renderer often causes crashes on these systems. Please press the following button to test whether you have this issue or not:".Loc());
+                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.ExclamationTriangle, "Reload DirectX11 render engine".Loc()))
                         {
                             P.ForceLoadDX11 = true;
                             S.RenderManager.ReloadEngine(RenderEngineKind.DirectX11);
@@ -44,8 +44,8 @@ internal partial class CGui
                             }], [-1]);
                             Tested = true;
                         }
-                        ImGuiEx.Text($"If your game hasn't crashed and you see red circle around you, you should be safe to enable DirectX11 render engine.");
-                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Check, "Enable DirectX11 renderer on Mac OS/Linux", enabled: Tested))
+                        ImGuiEx.Text("If your game hasn't crashed and you see a red circle around you, it should be safe to enable the DirectX11 render engine.".Loc());
+                        if(ImGuiEx.IconButtonWithText(FontAwesomeIcon.Check, "Enable DirectX11 renderer on Mac OS/Linux".Loc(), enabled: Tested))
                         {
                             P.Config.DX11EnabledOnMacLinux = true;
                             P.RemoveDynamicElements("Test");
@@ -61,7 +61,7 @@ internal partial class CGui
                     Splatoon supports few renderers. On this page, you can select which ones you want to use, configure them and set one of them as default.
                     Render engine can be set globally and per-element. When set render engine is not available, either due to load error or because user has disabled it, other available render engine will be used automatically.
                     Settings present in this section affect all available renderes.
-                    """.Loc());
+                    """.ReplaceLineEndings("\n").Loc());
                 ImGui.Separator();
                 ImGuiUtils.SizedText("Drawing distance:".Loc(), WidthLayout);
                 ImGui.SameLine();
@@ -94,7 +94,7 @@ internal partial class CGui
                 ImGuiUtils.EnumCombo("##alphablendmode", ref p.Config.AlphaBlendMode, AlphaBlendModes.Names, AlphaBlendModes.Tooltips);
                 if(ImGui.IsItemHovered())
                 {
-                    ImGui.SetTooltip("Change how overlapping elements' transparency is blended");
+                    ImGui.SetTooltip("Change how overlapping elements' transparency is blended".Loc());
                 }
 
                 ImGui.Checkbox("Automatically clip Splatoon's elements around native UI elements and windows".Loc(), ref P.Config.AutoClipNativeUI);
@@ -148,10 +148,10 @@ internal partial class CGui
                         ImGui.PopStyleColor();
 
                         ImGui.SameLine();
-                        ImGui.Checkbox("Override##" + name, ref enableOverride);
+                        ImGui.Checkbox("Override".Loc() + "##" + name, ref enableOverride);
                         ImGui.SameLine();
                         ImGui.PushStyleColor(ImGuiCol.Text, style.strokeColor);
-                        if(ImGui.Button("Reset To Default##" + name))
+                        if(ImGui.Button("Reset To Default".Loc() + "##" + name))
                         {
                             style = MechanicTypes.DefaultMechanicColors[mech];
                         }
@@ -179,7 +179,7 @@ internal partial class CGui
                 ImGuiComponents.HelpMarker("Higher - smoother circle, higher cpu usage".Loc());
 
                 ImGui.Checkbox("Disable circle fix while enabling drawing circles above your point of view".Loc(), ref P.Config.NoCircleFix);
-                ImGuiComponents.HelpMarker("Do not enable it unless you actually need it. Large circles may be rendered incorrectly under certain camera angle with this option enabled.");
+                ImGuiComponents.HelpMarker("Do not enable it unless you actually need it. Large circles may be rendered incorrectly under certain camera angles with this option enabled.".Loc());
 
                 ImGuiUtils.SizedText("Line segments:".Loc(), WidthLayout);
                 ImGui.SameLine();

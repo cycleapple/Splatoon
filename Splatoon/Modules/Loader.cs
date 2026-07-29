@@ -187,7 +187,7 @@ internal class Loader
                     File.WriteAllText(file, gVersion);
                 });
             }
-            if(ImGui.Button($"Join discord to be notified for update immediately."))
+            if(ImGui.Button("Join Discord to be notified of updates immediately.".Loc()))
             {
                 ShellStart("https://discord.nightmarexiv.com/");
             }

@@ -203,7 +203,7 @@ internal partial class CGui
 @"Freeze is an advanced setting that can have negative side effects.
 When the requirements to display an element are met,
 a new element is created and frozen in place and displayed for a duration.
-New frozen elements are created every refreeze interval.".Loc());
+New frozen elements are created every refreeze interval.".ReplaceLineEndings("\n").Loc());
             ImGui.TableNextColumn();
             layout.DrawFreezing();
 

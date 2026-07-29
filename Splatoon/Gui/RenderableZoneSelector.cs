@@ -1,5 +1,6 @@
 ﻿using Dalamud.Interface.Windowing;
 using ECommons.Reflection;
+using ECommons.LanguageHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -79,7 +80,7 @@ namespace Splatoon.Gui
                 var col = GradientColor.Get(ImGuiEx.Vector4FromRGBA(0x00ff0077), ImGuiEx.Vector4FromRGBA(0x00770077));
                 if(r.Rect.X < 0 || r.Rect.Y < 0 || r.Rect.Bottom > ImGuiHelpers.MainViewport.Size.Y || r.Rect.Right > ImGuiHelpers.MainViewport.Size.X)
                 {
-                    invalidText = "     Zone should be within screen boundaries";
+                    invalidText = "     " + "Zone should be within screen boundaries".Loc();
                     col = GradientColor.Get(ImGuiEx.Vector4FromRGBA(0xff000077), ImGuiEx.Vector4FromRGBA(0x77000077));
                 }
                 for(var j = 0; j < P.Config.RenderableZones.Count; j++)
@@ -87,7 +88,7 @@ namespace Splatoon.Gui
                     if(i == j) continue;
                     if(r.Rect.IntersectsWith(P.Config.RenderableZones[j].Rect))
                     {
-                        invalidText = "     Different zones can not intersect";
+                        invalidText = "     " + "Different zones can not intersect".Loc();
                         col = GradientColor.Get(ImGuiEx.Vector4FromRGBA(0xff000077), ImGuiEx.Vector4FromRGBA(0x77000077));
                     }
                 }
@@ -141,9 +142,9 @@ namespace Splatoon.Gui
                         ImGui.SetNextItemWidth(150f);
                         if(ImGui.InputInt("Y", ref y, 1, 10)) upd = i;
                         ImGui.SetNextItemWidth(150f);
-                        if(ImGui.InputInt("Width", ref w, 1, 10)) upd = i;
+                        if(ImGui.InputInt("Width".Loc(), ref w, 1, 10)) upd = i;
                         ImGui.SetNextItemWidth(150f);
-                        if(ImGui.InputInt("Height", ref h, 1, 10)) upd = i;
+                        if(ImGui.InputInt("Height".Loc(), ref h, 1, 10)) upd = i;
                         if(w < 30) w = 30;
                         if(h < 30) h = 30;
 
@@ -151,7 +152,7 @@ namespace Splatoon.Gui
 
                         HandlePopupMenu();
                         ImGui.Separator();
-                        if(ImGui.Selectable("Delete this zone"))
+                        if(ImGui.Selectable("Delete this zone".Loc()))
                         {
                             toRem = i;
                             //DuoLog.Information($"to remove: {toRem} ({i})");
@@ -164,7 +165,7 @@ namespace Splatoon.Gui
                     {
                         ImGuiEx.TextWrapped(invalidText);
                     }
-                    ImGuiEx.Text($"   Zone {i}\n   Right-click to open menu.");
+                    ImGuiEx.Text("   " + "Zone ??\nRight-click to open menu.".Loc(i));
                     if(w < 30) w = 30;
                     if(h < 30) h = 30;
                     P.Config.RenderableZones[i].Rect = new(x, y, w, h);
@@ -195,17 +196,17 @@ namespace Splatoon.Gui
             P.Config.RenderableZonesValid = AreAllValid();
             if(!P.Config.RenderableZonesValid)
             {
-                ImGuiEx.Text(GradientColor.Get(EColor.RedBright, EColor.YellowBright, 500), $"       Invalid configuration. Your settings will be ignored");
+                ImGuiEx.Text(GradientColor.Get(EColor.RedBright, EColor.YellowBright, 500), "       " + "Invalid configuration. Your settings will be ignored".Loc());
             }
             else
             {
-                ImGuiEx.Text($"       You have {P.Config.RenderableZones.Count} renderable areas.");
+                ImGuiEx.Text("       " + "You have ?? renderable areas.".Loc(P.Config.RenderableZones.Count));
                 if(P.Config.RenderableZones.Count == 0)
                 {
-                    ImGuiEx.Text($"       Your whole screen will be used to render Splatoon draws.");
+                    ImGuiEx.Text("       " + "Your whole screen will be used to render Splatoon draws.".Loc());
                 }
             }
-            ImGuiEx.Text($"       Right click to bring context menu.");
+            ImGuiEx.Text("       " + "Right click to bring context menu.".Loc());
             if(ImGui.IsWindowHovered() && ImGui.IsMouseClicked(ImGuiMouseButton.Right))
             {
                 ImGui.OpenPopup("Main rzs popup");
@@ -221,17 +222,17 @@ namespace Splatoon.Gui
 
         private void HandlePopupMenu()
         {
-            if(ImGui.Selectable("Add new zone"))
+            if(ImGui.Selectable("Add new zone".Loc()))
             {
                 P.Config.RenderableZones.Add(new(100, 100, 300, 300));
             }
             ImGui.Separator();
             for(var i = 0; i < P.Config.RenderableZones.Count; i++)
             {
-                if(ImGui.Selectable($"Select zone {i}")) bringToFront = i;
+                if(ImGui.Selectable("Select zone ??".Loc(i))) bringToFront = i;
             }
             ImGui.Separator();
-            if(ImGui.Selectable("Save configuration and exit"))
+            if(ImGui.Selectable("Save configuration and exit".Loc()))
             {
                 IsOpen = false;
                 P.Config.Save();

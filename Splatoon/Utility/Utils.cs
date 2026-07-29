@@ -433,12 +433,12 @@ public static unsafe class Utils
                     }
                     P.Config.LayoutsL.Add(l);
                     CGui.ScrollTo = l;
-                    if(!silent) Notify.Success($"Layout version 2\n{l.GetName()}");
+                    if(!silent) Notify.Success("Layout version 2\n??".Loc(l.GetName()));
                     layouts.Add(l);
                 }
                 else
                 {
-                    if(!silent) Notify.Info("Attempting to perform legacy import");
+                    if(!silent) Notify.Info("Attempting to perform legacy import".Loc());
                     var l = DeserializeLegacyLayout(str);
                     P.Config.LayoutsL.Add(l);
                     CGui.ScrollTo = l;
@@ -447,16 +447,16 @@ public static unsafe class Utils
             }
             catch(Exception e)
             {
-                if(!silent) Notify.Error($"Error parsing layout: {e.Message}");
+                if(!silent) Notify.Error("Error parsing layout: ??".Loc(e.Message));
             }
         }
         if(layouts.Count > 0)
         {
-            Notify.Success($"Imported {layouts.Count} layouts");
+            Notify.Success("Imported ?? layouts".Loc(layouts.Count));
         }
         else
         {
-            Notify.Error($"No layouts detected in clipboard");
+            Notify.Error("No layouts detected in clipboard".Loc());
         }
         return layouts;
     }
@@ -470,11 +470,11 @@ public static unsafe class Utils
             try
             {
                 json = Encoding.UTF8.GetString(Convert.FromBase64String(json));
-                Notify.Info("Import type: Base64");
+                Notify.Info("Import type: Base64".Loc());
             }
             catch(Exception)
             {
-                Notify.Info("Import type: JSON");
+                Notify.Info("Import type: JSON".Loc());
             }
             if(P.Config.LayoutsL.Any(x => x.Name == name) && !ImGui.GetIO().KeyCtrl)
             {
@@ -498,7 +498,7 @@ public static unsafe class Utils
         }
         else
         {
-            Notify.Info("Import type: Legacy/Paisley Park/Waymark preset plugin");
+            Notify.Info("Import type: Legacy/Paisley Park/Waymark preset plugin".Loc());
             var lp = JsonConvert.DeserializeObject<LegacyPreset>(import);
             if(lp.Name == null || lp.Name == "") lp.Name = DateTimeOffset.Now.ToLocalTime().ToString().Replace(",", ".");
             if(lp.A == null && lp.B == null && lp.C == null && lp.D == null &&
@@ -542,7 +542,7 @@ public static unsafe class Utils
     public static void ExportToClipboard(this Layout l)
     {
         ImGui.SetClipboardText(l.Serialize());
-        Notify.Success($"{l.GetName()} copied to clipboard.");
+        Notify.Success("?? copied to clipboard.".Loc(l.GetName()));
     }
 
     public static string Serialize(this Layout l)
@@ -553,7 +553,7 @@ public static unsafe class Utils
     public static void ExportToClipboard(this Element l)
     {
         ImGui.SetClipboardText(l.Serialize());
-        Notify.Success($"{l.GetName()} copied to clipboard.");
+        Notify.Success("?? copied to clipboard.".Loc(l.GetName()));
     }
 
     public static string Serialize(this Element l)

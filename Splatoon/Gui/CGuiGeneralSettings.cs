@@ -22,7 +22,7 @@ internal partial class CGui
         ImGuiEx.Text("Game version: ".Loc());
         ImGui.SameLine(0, 0);
         ImGuiEx.TextCopy(p.loader.gVersion);
-        new NuiBuilder().Section("Logging and Web API", collapsible: false)
+        new NuiBuilder().Section("Logging and Web API".Loc(), collapsible: false)
             .Widget(() =>
             {
                 ImGuiUtils.SizedText("Use web API".Loc(), WidthLayout);
@@ -79,7 +79,7 @@ internal partial class CGui
                 ImGuiComponents.HelpMarker("Log object position in casting information log lines".Loc());
             })
 
-            .Section("Language", collapsible: false)
+            .Section("Language".Loc(), collapsible: false)
             .Widget(() =>
             {
                 ImGuiEx.TextV("Splatoon language: ".Loc());
@@ -115,7 +115,7 @@ internal partial class CGui
                 }
             })
 
-            .Section("UI settings", collapsible: false)
+            .Section("UI settings".Loc(), collapsible: false)
             .Widget(() =>
             {
                 ImGui.Checkbox("Use hexadecimal numbers".Loc(), ref p.Config.Hexadecimal);
@@ -123,31 +123,31 @@ internal partial class CGui
                 ImGui.Checkbox("Force show Splatoon's UI when game UI is hidden".Loc(), ref p.Config.ShowOnUiHide);
             })
 
-            .Section("Scripts configuration and priority lists", collapsible: false)
+            .Section("Scripts configuration and priority lists".Loc(), collapsible: false)
             .Widget(() =>
             {
                 ImGui.Checkbox("Disable script cache".Loc(), ref p.Config.DisableScriptCache);
                 var state = DalamudReflector.GetDtrEntryState(InfoBar.EntryName);
-                if(ImGui.Checkbox("Enable info bar priority indicator", ref state))
+                if(ImGui.Checkbox("Enable info bar priority indicator".Loc(), ref state))
                 {
                     DalamudReflector.SetDtrEntryState(InfoBar.EntryName, state);
                 }
                 ImGui.SetNextItemWidth(150f);
-                ImGuiEx.EnumCombo("Priority assignment auto-loading notification", ref P.Config.ScriptPriorityNotification);
-                ImGuiEx.TreeNodeCollapsingHeader("Preferred Role Assignments", () =>
+                ImGuiEx.EnumCombo("Priority assignment auto-loading notification".Loc(), ref P.Config.ScriptPriorityNotification);
+                ImGuiEx.TreeNodeCollapsingHeader("Preferred Role Assignments".Loc(), () =>
                 {
-                    ImGuiEx.Text($"Select role assignments that you would like to assigned to yourself via autofill function");
+                    ImGuiEx.Text("Select role assignments that you would like assigned to yourself through the autofill function.".Loc());
                     foreach(var j in Enum.GetValues<Job>().Where(x => x > 0 && !x.IsUpgradeable() && x.IsCombat()).OrderBy(x => P.PriorityPopupWindow.GetOrderedRoleIndex(x)))
                     {
                         var pref = P.Config.PreferredPositions.SafeSelect(j);
-                        var name = PriorityPopupWindow.ConfiguredNames.SafeSelect(pref) ?? "No preferred position";
+                        var name = PriorityPopupWindow.ConfiguredNames.SafeSelect(pref) ?? "No preferred position".Loc();
                         ImGui.PushID(j.ToString());
                         ImGui.SetNextItemWidth(150f);
                         if(ImGui.BeginCombo("##jselect", name, ImGuiComboFlags.HeightLarge))
                         {
                             foreach(var x in Enum.GetValues<RolePosition>())
                             {
-                                if(ImGui.Selectable(PriorityPopupWindow.ConfiguredNames.SafeSelect(x) ?? "No preferred position", pref == x))
+                                if(ImGui.Selectable(PriorityPopupWindow.ConfiguredNames.SafeSelect(x) ?? "No preferred position".Loc(), pref == x))
                                 {
                                     P.Config.PreferredPositions[j] = x;
                                 }
@@ -164,7 +164,7 @@ internal partial class CGui
                         ImGui.PopID();
                     }
                 });
-                ImGuiEx.TreeNodeCollapsingHeader("Edit saved priority lists", () =>
+                ImGuiEx.TreeNodeCollapsingHeader("Edit saved priority lists".Loc(), () =>
                 {
                     Dictionary<uint, List<RolePlayerAssignment>> dict = [];
                     foreach(var x in P.Config.RolePlayerAssignments)
@@ -179,7 +179,7 @@ internal partial class CGui
                     foreach(var x in dict)
                     {
                         ImGui.PushID(x.Key.ToString());
-                        ImGuiEx.TreeNodeCollapsingHeader($"{ExcelTerritoryHelper.GetName(x.Key)} - {x.Value.Count} assignments###edit{x.Key}", () =>
+                        ImGuiEx.TreeNodeCollapsingHeader($"{ExcelTerritoryHelper.GetName(x.Key)} - {"?? assignments".Loc(x.Value.Count)}###edit{x.Key}", () =>
                         {
                             if(ImGui.BeginTable($"PrioTable{x.Key}", 2, ImGuiEx.DefaultTableFlags))
                             {
@@ -211,7 +211,7 @@ internal partial class CGui
                 });
             })
 
-            .Section("Miscellaneous", collapsible: false)
+            .Section("Miscellaneous".Loc(), collapsible: false)
             .Widget(() =>
             {
                 if(ImGui.Button("Open backup directory".Loc()))

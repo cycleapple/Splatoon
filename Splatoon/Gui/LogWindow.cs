@@ -3,6 +3,7 @@ using Dalamud.Interface.Windowing;
 using ECommons;
 using ECommons.CircularBuffers;
 using ECommons.Reflection;
+using ECommons.LanguageHelpers;
 using NightmareUI;
 using Serilog.Events;
 using System;
@@ -26,7 +27,7 @@ public class LogWindow : Window
 
     public override void Draw()
     {
-        NuiTools.ButtonTabs([[new("Standard log", InternalLog.PrintImgui), new("Filtered log", PrintFiltered)]]);
+        NuiTools.ButtonTabs([[new("Standard log".Loc(), InternalLog.PrintImgui), new("Filtered log".Loc(), PrintFiltered)]]);
     }
 
     private bool Autoscroll = true;
@@ -35,21 +36,21 @@ public class LogWindow : Window
     private void PrintFiltered()
     {
         ImGui.Checkbox("##Autoscroll", ref Autoscroll);
-        ImGuiEx.Tooltip("Autoscroll");
+        ImGuiEx.Tooltip("Autoscroll".Loc());
         ImGui.SameLine();
-        if(ImGui.Button("Copy all"))
+        if(ImGui.Button("Copy all".Loc()))
         {
 #pragma warning disable
             GenericHelpers.Copy(FilteredLog.Select(x => $"[{x.Level}@{x.Time}] {x.Message}").Join("\n"));
 #pragma warning restore
         }
         ImGui.SameLine();
-        if(ImGui.Button("Clear"))
+        if(ImGui.Button("Clear".Loc()))
         {
             FilteredLog.Clear();
         }
         ImGui.SameLine();
-        ImGui.InputTextWithHint("##Filter", "Filter...", ref Search, 100);
+        ImGui.InputTextWithHint("##Filter", "Filter...".Loc(), ref Search, 100);
 
         ImGui.BeginChild($"Plugin_log{DalamudReflector.GetPluginName()}");
         foreach(var x in FilteredLog)

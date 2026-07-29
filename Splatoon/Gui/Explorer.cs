@@ -13,7 +13,7 @@ internal static unsafe class Explorer
     {
         ImGui.BeginChild("##exch");
         var x = Svc.Objects.FirstOrDefault(x => x.Address == Ptr);
-        ImGuiEx.Text(ImGuiColors.DalamudOrange, "Beta");
+        ImGuiEx.Text(ImGuiColors.DalamudOrange, "Beta".Loc());
         if(ImGui.BeginCombo("##selector", $"{(Ptr == nint.Zero ? "Target".Loc() : $"{(x == null ? $"{Ptr:X16} - " + "invalid pointer".Loc() : $"{x}")}")}"))
         {
             if(ImGui.Selectable("Target".Loc()))
@@ -48,8 +48,8 @@ internal static unsafe class Explorer
 
     internal static void DrawGameObject(IGameObject obj)
     {
-        ImGuiEx.TextCopy($"GameObject {obj}");
-        ImGuiEx.TextCopy($"ObjectKind: {obj.ObjectKind}");
+        ImGuiEx.TextCopy($"{"Game object".Loc()}: {obj}");
+        ImGuiEx.TextCopy($"{"Object kind".Loc()}: {obj.ObjectKind}");
         ImGuiEx.TextCopy($"{"Position".Loc()}: {obj.Position.X} {obj.Position.Y} {obj.Position.Z}");
         ImGuiEx.TextCopy($"{"Rotation".Loc()}: {obj.Rotation}/{360 - (obj.Rotation.RadiansToDegrees() + 180)}");
         ImGuiEx.TextCopy($"Vector3 {"distance".Loc()}: {Vector3.Distance(obj.Position, Svc.ClientState.LocalPlayer.Position)}");
@@ -79,10 +79,10 @@ internal static unsafe class Explorer
         ImGuiEx.TextCopy($"LayoutID:  {obj.Struct()->LayoutId}");
         if(obj is ICharacter c)
         {
-            ImGuiEx.TextCopy("---------- Character ----------");
+            ImGuiEx.TextCopy($"---------- {"Character".Loc()} ----------");
             ImGuiEx.TextCopy($"{"HP".Loc()}: {c.CurrentHp} / {c.MaxHp}");
             ImGuiEx.TextCopy($"{"Name NPC ID".Loc()}: {c.NameId}");
-            ImGuiEx.TextWrappedCopy($"Customize: {c.Customize.Select(x => $"{x:X2}").Join(" ")}");
+            ImGuiEx.TextWrappedCopy($"{"Appearance data".Loc()}: {c.Customize.Select(x => $"{x:X2}").Join(" ")}");
             ImGuiEx.TextCopy($"ModelCharaId: {c.Struct()->ModelContainer.ModelCharaId}");
             ImGuiEx.TextCopy($"{"Visible".Loc()}: {c.IsCharacterVisible()}");
             ImGuiEx.TextCopy($"VfxData: {(nint)c.Struct()->Vfx.VfxData:X16}");
@@ -116,7 +116,7 @@ internal static unsafe class Explorer
         }
         if(obj is IBattleChara b)
         {
-            ImGuiEx.TextCopy("---------- Battle chara ----------");
+            ImGuiEx.TextCopy($"---------- {"Battle character".Loc()} ----------");
             ImGuiEx.TextCopy($"{"Casting".Loc()}: {b.IsCasting}, {"Action ID".Loc()} = {b.CastActionId.Format()}, {"Type".Loc()} = {b.CastActionType}, {"Cast time".Loc()}: {b.CurrentCastTime:F1}/{b.TotalCastTime:F1}");
             if(AttachedInfo.CastInfos.TryGetValue(b.Address, out var info))
             {

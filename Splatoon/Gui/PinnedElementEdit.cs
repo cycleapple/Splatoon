@@ -1,4 +1,5 @@
 ﻿using Dalamud.Interface.Windowing;
+using ECommons.LanguageHelpers;
 using Splatoon.SplatoonScripting;
 using System;
 using System.Collections.Generic;
@@ -30,14 +31,14 @@ namespace Splatoon.Gui
             }
             else
             {
-                ImGuiEx.Text($"An error has occurred.");
+                ImGuiEx.Text("An error has occurred.".Loc());
             }
         }
 
         public override void OnClose()
         {
             Script.Controller.SaveOverrides();
-            Notify.Info("Override saved");
+            Notify.Info("Override saved".Loc());
             Script.Controller.ApplyOverrides();
             EditingElement = null;
             Script = null;
@@ -51,7 +52,7 @@ namespace Splatoon.Gui
             }
             EditingElement = s.InternalData.Overrides.Elements[name];
             Script = s;
-            WindowName = $"Editing element [{name}] from {s.InternalData.FullName}###Pinned element editor";
+            WindowName = "Editing element [??] from ??".Loc(name, s.InternalData.FullName) + "###Pinned element editor";
             IsOpen = true;
         }
 

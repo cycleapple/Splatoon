@@ -1,5 +1,6 @@
 ﻿using ECommons.Configuration;
 using ECommons.ExcelServices;
+using ECommons.LanguageHelpers;
 using Newtonsoft.Json;
 using NightmareUI;
 using Pictomancy;
@@ -199,7 +200,7 @@ internal class Configuration : IEzConfig
                 plugin.tickScheduler.Enqueue(delegate
                 {
                     plugin.Log("Backup created: " + bkpFile);
-                    Notify.Info("A backup of your current configuration has been created.");
+                    Notify.Info("A backup of your current configuration has been created.".Loc());
                 });
             }
             catch(Exception e)
