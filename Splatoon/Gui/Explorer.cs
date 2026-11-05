@@ -1,4 +1,4 @@
-﻿using Dalamud.Interface.Colors;
+using Dalamud.Interface.Colors;
 using ECommons.GameFunctions;
 using ECommons.LanguageHelpers;
 using ECommons.MathHelpers;
@@ -73,7 +73,7 @@ internal static unsafe class Explorer
         ImGuiEx.TextCopy($"{"RenderFlags".Loc()}: {obj.Struct()->RenderFlags}");
         ImGuiEx.TextCopy($"{"SubKind".Loc()}: {obj.Struct()->SubKind}");
         ImGuiEx.TextCopy($"{"TargetStatus".Loc()}: {obj.Struct()->TargetStatus}");
-        ImGuiEx.TextCopy($"RenderFlags:  {Convert.ToString(obj.Struct()->RenderFlags, 2)}");
+        ImGuiEx.TextCopy($"RenderFlags:  {Convert.ToString((long)obj.Struct()->RenderFlags, 2)}");
         ImGuiEx.TextCopy($"NamePlateIconId:  {obj.Struct()->NamePlateIconId}");
         ImGuiEx.TextCopy($"DrawObject:  {(nint)obj.Struct()->DrawObject:X16}");
         ImGuiEx.TextCopy($"LayoutID:  {obj.Struct()->LayoutId}");
@@ -85,9 +85,10 @@ internal static unsafe class Explorer
             ImGuiEx.TextWrappedCopy($"{"Appearance data".Loc()}: {c.Customize.Select(x => $"{x:X2}").Join(" ")}");
             ImGuiEx.TextCopy($"ModelCharaId: {c.Struct()->ModelContainer.ModelCharaId}");
             ImGuiEx.TextCopy($"{"Visible".Loc()}: {c.IsCharacterVisible()}");
-            ImGuiEx.TextCopy($"VfxData: {(nint)c.Struct()->Vfx.VfxData:X16}");
-            ImGuiEx.TextCopy($"VfxData2: {(nint)c.Struct()->Vfx.VfxData2:X16}");
-            ImGuiEx.TextCopy($"Omen: {(nint)c.Struct()->Vfx.Omen:X16}");
+            ImGuiEx.TextCopy($"VfxData: {(nint)c.Struct()->Vfx.VfxData[0].Value:X16}");
+            ImGuiEx.TextCopy($"VfxData2: {(nint)c.Struct()->Vfx.VfxData[1].Value:X16}");
+
+            ImGuiEx.TextCopy("Omen: API14 no longer exposes this field");
             ImGuiEx.TextCopy($"TargetObject: {c.TargetObject}");
             ImGuiEx.TextCopy($"TargetObjectID: {c.TargetObjectId}");
             ImGuiEx.TextCopy($"EventState:  {c.Struct()->EventState}");

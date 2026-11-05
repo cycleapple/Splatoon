@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.ClientState.Objects.SubKinds;
+using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.Game.ClientState.Statuses;
 using Dalamud.Utility;
 using ECommons;
@@ -399,7 +399,7 @@ public static unsafe class Utils
         return false;
     }
 
-    public static bool IsInRange(this Status buff, float min, float max)
+    public static bool IsInRange(this IStatus buff, float min, float max)
     {
         if(buff.RemainingTime.InRange(min, max))
         {

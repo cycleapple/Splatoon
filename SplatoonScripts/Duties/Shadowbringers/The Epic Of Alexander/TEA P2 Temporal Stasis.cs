@@ -98,7 +98,7 @@ public class TEA_P2_Temporal_Stasis : SplatoonScript
         _shouldDisplayElement = false;
     }
 
-    private BaitType GetBaitType(IEnumerable<Status> statuses)
+    private BaitType GetBaitType(IEnumerable<IStatus> statuses)
     {
         foreach(var status in statuses)
             switch(status.StatusId)

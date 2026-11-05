@@ -1,0 +1,26 @@
+[
+  {
+    "path": "ECommons",
+    "baseCommit": "2d49650b1f980f62f5acae690b0e03cf70628855",
+    "patch": "patches/e347001520b30beb.patch",
+    "sha256": "aab766e6dd5cfad717112f7e38ed9a0ebda0901c621140a3dd48841b9d2585ff"
+  },
+  {
+    "path": "FFXIVClientStructs",
+    "baseCommit": "937d4fd012ad378132f26b09690e685b1096dfc4",
+    "patch": "patches/db59c145327a52d7.patch",
+    "sha256": "0a3f92d5b0b31b9ae022afdb0b357adb027178966aa1dbfcc0d8e98d9ea36105"
+  },
+  {
+    "path": "NightmareUI",
+    "baseCommit": "28463f8c25fb167abccace2da98765ad23f0268b",
+    "patch": "patches/71c63842f9d729a9.patch",
+    "sha256": "979829d1a774de0560e8ad97f6f40eb9e84a6debea95a48a3f3238fc04920a71"
+  },
+  {
+    "path": "ffxiv_pictomancy",
+    "baseCommit": "d7c669f5192e36052dca5f5e91422a2adba4db79",
+    "patch": "patches/7b9d096c5556e015.patch",
+    "sha256": "c02749485e9937e0e860e9e5938ffbe68cc738da4841c3a9da489eb8f953a635"
+  }
+]

@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
-using Status = FFXIVClientStructs.FFXIV.Client.Game.Status;
+using IStatus = FFXIVClientStructs.FFXIV.Client.Game.Status;
 
 namespace SplatoonScriptsOfficial.Duties.Dawntrail.The_Futures_Rewritten;
 
@@ -157,7 +157,7 @@ public class P3_Ultimate_Relativity : SplatoonScript
         return direction;
     }
 
-    public override void OnGainBuffEffect(uint sourceId, Status Status)
+    public override void OnGainBuffEffect(uint sourceId, IStatus Status)
     {
         if(_state == State.Start)
             if(FakeParty.Get()
@@ -354,7 +354,7 @@ public class P3_Ultimate_Relativity : SplatoonScript
         }
     }
 
-    public override void OnRemoveBuffEffect(uint sourceId, Status Status)
+    public override void OnRemoveBuffEffect(uint sourceId, IStatus Status)
     {
         if(_state == State.End) return;
         if(Status.StatusId == 2970)
