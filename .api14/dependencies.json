@@ -22,5 +22,11 @@
     "baseCommit": "d7c669f5192e36052dca5f5e91422a2adba4db79",
     "patch": "patches/7b9d096c5556e015.patch",
     "sha256": "c02749485e9937e0e860e9e5938ffbe68cc738da4841c3a9da489eb8f953a635"
+  },
+  {
+    "path": "api14-deps/NotificationMasterAPI",
+    "baseCommit": "4820166aebf63290616e7f9090b514936eab13b3",
+    "patch": "patches/e00f8b1b8da20344.patch",
+    "sha256": "1a2d04d308c45ffc31bae2d8c38522e45a49bb0fccf4272951591087a9f2704a"
   }
 ]
