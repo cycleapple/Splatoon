@@ -3,7 +3,7 @@
     "path": "ECommons",
     "baseCommit": "2d49650b1f980f62f5acae690b0e03cf70628855",
     "patch": "patches/e347001520b30beb.patch",
-    "sha256": "9c351acbe9f20e1a817d123c2ace882f57658dae479c01b84b807b2ff03e1436"
+    "sha256": "12530bc58070015b8f2b484c4abd93f97021e42db0658e5a2224b101e0df4182"
   },
   {
     "path": "FFXIVClientStructs",
